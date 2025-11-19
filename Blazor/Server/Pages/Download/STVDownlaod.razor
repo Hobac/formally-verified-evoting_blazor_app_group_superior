@@ -1,0 +1,51 @@
+﻿@page "/downloads/stv"
+@inject IWebHostEnvironment Env
+
+<PageTitle>Download</PageTitle>
+
+<!-- Header -->
+<div class="logo-header-div">
+    <h1>
+        Downloads
+    </h1>
+    <img src="logo.png" alt="Superior Voting Logo" />
+</div>
+
+<div class="listing-div">
+    <h3>ZIP Archive</h3>
+    <a class="btn-link-main" style="max-width:400px" href="Downloads/STV/STV.zip" download>STV.zip</a>
+</div>
+
+<div class="listing-div">
+    <h3>Single Files</h3>
+    @foreach (var file in files)
+    {
+        <a class="btn-link-main" style="max-width:400px" href="@file.Item1" download>@file.Item2</a>
+    }
+</div>
+<br>
+<br />
+
+@code {
+    private List<Tuple<string, string>> files = new();
+
+    protected override void OnInitialized()
+    {
+        var path = Path.Combine(Env.WebRootPath, "Downloads", "STV");
+
+        if (Directory.Exists(path))
+        {
+            DirectoryInfo info = new DirectoryInfo(path);
+            foreach (FileInfo file in info.GetFiles())
+            {
+                if(file.Extension != ".dfy")
+                {
+                    continue;
+                }
+
+                var url = $"Downloads/STV/{file.Name}";
+                files.Add(new Tuple<string, string>(url, file.Name));
+            }
+        }
+    }
+}

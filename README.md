@@ -29,6 +29,8 @@ Follow these step-by-step instructions to get the project running:
 6. **Configure the application**
    - Open `config.xml`
    - Adjust all values to your environment, e.g., database user and password
+   - Open `appsettings.json`
+   - Adjust the Url to your needs
 
 7. **Compile and run**
    - Compile the project for your target environment

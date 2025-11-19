@@ -1,0 +1,27 @@
+﻿@page "/explanations"
+@inject NavigationManager Navigation;
+
+<PageTitle>Explanation</PageTitle>
+
+<!-- Header -->
+<div class="logo-header-div">
+    <h1>
+        Explanations
+    </h1>
+    <img src="logo.png" alt="Superior Voting Logo" />
+</div>
+
+<div class="listing-div">
+    <button class="btn-main" @onclick="() => NavigateToExplanation(VotingSystem.Borda_count)">Borda Count</button>
+    <button class="btn-main" @onclick="() => NavigateToExplanation(VotingSystem.Single_transferable_vote)">Single Transferable Vote</button>
+</div>
+
+
+
+@code {
+    private void NavigateToExplanation(VotingSystem system)
+    {
+        Navigation.NavigateTo("explanations/" + Help.GetSystemURL(system));
+    }
+}
+

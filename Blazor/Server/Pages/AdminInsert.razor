@@ -1,0 +1,38 @@
+﻿@page "/admin"
+@inject IJSRuntime JS
+@inject NavigationManager NavManager
+
+<PageTitle>Admin</PageTitle>
+
+<h1>
+    Go to Election Admin
+</h1>
+<br>
+<br />
+
+<p>You can insert your token here!</p>
+<input class="input-main" @bind="token" />
+<br>
+<br />
+
+<button class="btn-main" @onclick="Redirect">Submit</button>
+
+@code {
+    private string token = "";
+
+    private void Redirect()
+    {
+        if(string.IsNullOrEmpty(token))
+        {
+            NavManager.NavigateTo(Routes.InvalidToken);
+            return;
+        }
+        if (token.Length == Config.VoterTokenLength)
+        {
+            NavManager.NavigateTo(Routes.WrongToken);
+            return;
+        }
+
+        NavManager.NavigateTo($"admin/" + token);
+    }
+}

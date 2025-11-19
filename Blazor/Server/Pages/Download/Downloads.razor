@@ -1,0 +1,26 @@
+﻿@page "/downloads"
+@inject NavigationManager Navigation;
+
+<PageTitle>Download</PageTitle>
+
+<!-- Header -->
+<div class="logo-header-div">
+    <h1>
+        Downloads
+    </h1>
+    <img src="logo.png" alt="Superior Voting Logo" />
+</div>
+
+<div class="listing-div">
+    <button class="btn-main" @onclick="() => NavigateToDownload(VotingSystem.Borda_count)">Borda Count</button>
+    <button class="btn-main" @onclick="() => NavigateToDownload(VotingSystem.Single_transferable_vote)">Single Transferable Vote</button>
+</div>
+
+
+
+@code {
+    private void NavigateToDownload(VotingSystem system)
+    {
+        Navigation.NavigateTo("downloads/" + Help.GetSystemURL(system));
+    }
+}

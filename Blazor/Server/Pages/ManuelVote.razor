@@ -1,0 +1,60 @@
+﻿@page "/insert"
+@inject IJSRuntime JS
+@inject NavigationManager NavManager
+@using E_Voting.Transfer
+
+<PageTitle>Insert</PageTitle>
+
+<h1>
+    Go to Voting Page
+</h1>
+<br>
+<br />
+
+<p>You can insert your token here!</p>
+<input class="input-main" @bind="token" />
+<br>
+<br />
+
+<button class="btn-main" @onclick="Redirect">Submit</button>
+
+@code {
+    private string token = "";
+
+    private void Redirect()
+    {
+        if(string.IsNullOrEmpty(token))
+        {
+            NavManager.NavigateTo(Routes.InvalidToken);
+            return;
+        }
+        if (token.Length == Config.AdminTokenLength)
+        {
+            NavManager.NavigateTo(Routes.WrongToken);
+            return;
+        }
+
+        Voter? voter = Database.CheckToken(token);
+        if(voter == null)
+        {
+            NavManager.NavigateTo(Routes.InvalidToken);
+            return;
+        }
+
+        Election? election = Database.GetElection(voter.ElectionID, true, PrivacyLevel.Voters);
+        if(election == null)
+        {
+            NavManager.NavigateTo(Routes.ServerError);
+            return;
+        }
+
+        if(election.Result == Config.EmptyResult)
+        {
+            NavManager.NavigateTo($"vote/" + token);
+        }
+        else
+        {
+            NavManager.NavigateTo($"result/" + token);
+        }
+    }
+}
