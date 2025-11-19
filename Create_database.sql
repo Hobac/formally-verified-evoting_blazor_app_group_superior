@@ -2,7 +2,7 @@ CREATE TABLE `type` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-)
+);
 
 CREATE TABLE `election` (
   `id` bigint NOT NULL AUTO_INCREMENT,
