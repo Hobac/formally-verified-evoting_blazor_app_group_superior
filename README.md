@@ -47,3 +47,8 @@ The project group, called **Superior Group** (inside joke), consisted of:
 4. Henrik Oback
 
 The exact contributions of each member are detailed in the project report.
+
+## Licensing Information
+Some files in this repository contain the GNU Affero General Public License (AGPL) header for uniformity, including files originally generated from project templates. 
+Not all content in this repository is covered by the AGPL. 
+Third-party libraries, fonts, and other assets included may be subject to different licenses as indicated in their respective documentation or source. 
